@@ -19,9 +19,7 @@ getdata <- function(data) {
     patient <- patient %>%
       tibble::as_tibble() %>%
       dplyr::mutate_at(c("confirmed_date", "released_date", "deceased_date"),
-                lubridate::as_date) %>%
-
-      dplyr::arrange(desc(date))
+                lubridate::as_date)
 
     return(patient)
   }
