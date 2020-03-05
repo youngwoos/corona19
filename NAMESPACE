@@ -2,6 +2,7 @@
 
 export(getdata)
 importFrom(dplyr,"%>%")
+importFrom(dplyr,arrange)
 importFrom(dplyr,mutate_at)
 importFrom(lubridate,as_date)
 importFrom(tibble,as_tibble)

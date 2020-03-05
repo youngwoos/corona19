@@ -6,7 +6,7 @@
 \alias{corona19-package}
 \title{corona19: Data Package of Coronavirus Disease 2019 in South Korea}
 \description{
-Get datasets of Coronavirus disease 2019 in South Korea.
+Import datasets of Coronavirus disease 2019 in South Korea.
 }
 \seealso{
 Useful links:
