@@ -1,6 +1,6 @@
 #' @export
 #' @importFrom utils read.csv
-#' @importFrom dplyr mutate_at %>%
+#' @importFrom dplyr mutate_at arrange %>%
 #' @importFrom tibble as_tibble
 #' @importFrom lubridate as_date
 
@@ -19,7 +19,9 @@ getdata <- function(data) {
     patient <- patient %>%
       tibble::as_tibble() %>%
       dplyr::mutate_at(c("confirmed_date", "released_date", "deceased_date"),
-                lubridate::as_date)
+                lubridate::as_date) %>%
+
+      dplyr::arrange(desc(date))
 
     return(patient)
   }
@@ -37,7 +39,8 @@ getdata <- function(data) {
     # modify colum type
     route <- route %>%
       tibble::as_tibble() %>%
-      dplyr::mutate_at("date", lubridate::as_date)
+      dplyr::mutate_at("date", lubridate::as_date) %>%
+      dplyr::arrange(desc(date))
 
     return(route)
   }
@@ -54,7 +57,8 @@ getdata <- function(data) {
     # modify column type
     state <- state %>%
       tibble::as_tibble() %>%
-      dplyr::mutate_at("date", lubridate::as_date)
+      dplyr::mutate_at("date", lubridate::as_date) %>%
+      dplyr::arrange(desc(date))
 
     return(state)
   }
