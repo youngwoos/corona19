@@ -15,18 +15,9 @@ knitr::opts_chunk$set(
 
 # corona19
 
-The goal of corona19 is to get datasets of Coronavirus disease 2019 in South Korea from [Coronavirus-Dataset repository](https://github.com/jihoo-kim/Coronavirus-Dataset).
+The goal of `corona19` is to get datasets of Coronavirus disease 2019 in South Korea from [Coronavirus-Dataset repository](https://github.com/jihoo-kim/Coronavirus-Dataset).
 
 ---
-
-
-
-## Installation
-
-``` r
-# install.packages("remotes")
-remotes::install_github("youngwoos/corona19")
-```
 
 
 ## Dataset infomation
@@ -121,7 +112,17 @@ remotes::install_github("youngwoos/corona19")
   - **latitude**: 위도
   - **longitude**: 경도
 
+
+## Installation
+
+``` r
+# install.packages("remotes")
+remotes::install_github("youngwoos/corona19")
+```
+
+
 ## Example
+
 ```{r example, message=FALSE, warning=F}
 library(corona19)
 

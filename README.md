@@ -3,18 +3,11 @@
 
 # corona19
 
-The goal of corona19 is to get datasets of Coronavirus disease 2019 in
+The goal of `corona19` is to get datasets of Coronavirus disease 2019 in
 South Korea from [Coronavirus-Dataset
 repository](https://github.com/jihoo-kim/Coronavirus-Dataset).
 
 -----
-
-## Installation
-
-``` r
-# install.packages("remotes")
-remotes::install_github("youngwoos/corona19")
-```
 
 ## Dataset infomation
 
@@ -106,6 +99,13 @@ remotes::install_github("youngwoos/corona19")
       - etc: 기타 방문 장소
   - **latitude**: 위도
   - **longitude**: 경도
+
+## Installation
+
+``` r
+# install.packages("remotes")
+remotes::install_github("youngwoos/corona19")
+```
 
 ## Example
 
