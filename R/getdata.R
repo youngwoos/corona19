@@ -10,7 +10,7 @@ getdata <- function(data) {
   if (data == "patient") {
     patient <-
       utils::read.csv (
-        "https://github.com/jihoo-kim/Coronavirus-Dataset/raw/master/patient.csv",
+        "https://github.com/jihoo-kim/Data-Science-for-COVID-19/raw/master/dataset/Patient/PatientInfo.csv",
         stringsAsFactors = F,
         na.strings = ""
       )
@@ -19,9 +19,7 @@ getdata <- function(data) {
     patient <- patient %>%
       tibble::as_tibble() %>%
       dplyr::mutate_at(c("confirmed_date", "released_date", "deceased_date"),
-                lubridate::as_date) %>%
-
-      dplyr::arrange(desc(date))
+                lubridate::as_date)
 
     return(patient)
   }
@@ -31,7 +29,7 @@ getdata <- function(data) {
   else if (data == "route") {
     route <-
       utils::read.csv (
-        "https://github.com/jihoo-kim/Coronavirus-Dataset/raw/master/route.csv",
+        "https://github.com/jihoo-kim/Data-Science-for-COVID-19/raw/master/dataset/Patient/PatientRoute.csv",
         stringsAsFactors = F,
         na.strings = ""
       )
@@ -45,22 +43,22 @@ getdata <- function(data) {
     return(route)
   }
 
-  # 03_state --------------------------------------------------------------------
-  else if (data == "state") {
-    state <-
+  # 03_time --------------------------------------------------------------------
+  else if (data == "time") {
+    time <-
       utils::read.csv (
-        "https://github.com/jihoo-kim/Coronavirus-Dataset/raw/master/time.csv",
+        "https://github.com/jihoo-kim/Data-Science-for-COVID-19/raw/master/dataset/Time/Time.csv",
         stringsAsFactors = F,
         na.strings = ""
       )
 
     # modify column type
-    state <- state %>%
+    time <- time %>%
       tibble::as_tibble() %>%
       dplyr::mutate_at("date", lubridate::as_date) %>%
       dplyr::arrange(desc(date))
 
-    return(state)
+    return(time)
   }
   stop(paste0("Object '", data, "' not found. Check dataset name."))
 }
