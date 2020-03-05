@@ -1,12 +1,15 @@
-getdata <- function(data) {
-  library(dplyr)
-  library(lubridate)
+#' @export
+#' @importFrom utils read.csv
+#' @importFrom dplyr mutate_at %>%
+#' @importFrom tibble as_tibble
+#' @importFrom lubridate as_date
 
+getdata <- function(data) {
 
   # 01_patient ----------------------------------------------------------------
   if (data == "patient") {
     patient <-
-      read.csv(
+      utils::read.csv (
         "https://github.com/jihoo-kim/Coronavirus-Dataset/raw/master/patient.csv",
         stringsAsFactors = F,
         na.strings = ""
@@ -14,9 +17,9 @@ getdata <- function(data) {
 
     # modify column type
     patient <- patient %>%
-      as_tibble() %>%
-      mutate_at(c("confirmed_date", "released_date", "deceased_date"),
-                as_date)
+      tibble::as_tibble() %>%
+      dplyr::mutate_at(c("confirmed_date", "released_date", "deceased_date"),
+                lubridate::as_date)
 
     return(patient)
   }
@@ -25,7 +28,7 @@ getdata <- function(data) {
   # 02_route ----------------------------------------------------------------
   else if (data == "route") {
     route <-
-      read.csv(
+      utils::read.csv (
         "https://github.com/jihoo-kim/Coronavirus-Dataset/raw/master/route.csv",
         stringsAsFactors = F,
         na.strings = ""
@@ -33,8 +36,8 @@ getdata <- function(data) {
 
     # modify colum type
     route <- route %>%
-      as_tibble() %>%
-      mutate_at("date", as_date)
+      tibble::as_tibble() %>%
+      dplyr::mutate_at("date", lubridate::as_date)
 
     return(route)
   }
@@ -42,7 +45,7 @@ getdata <- function(data) {
   # 03_state --------------------------------------------------------------------
   else if (data == "state") {
     state <-
-      read.csv(
+      utils::read.csv (
         "https://github.com/jihoo-kim/Coronavirus-Dataset/raw/master/time.csv",
         stringsAsFactors = F,
         na.strings = ""
@@ -50,8 +53,8 @@ getdata <- function(data) {
 
     # modify column type
     state <- state %>%
-      as_tibble() %>%
-      mutate_at("date", as_date)
+      tibble::as_tibble() %>%
+      dplyr::mutate_at("date", lubridate::as_date)
 
     return(state)
   }

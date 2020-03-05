@@ -14,7 +14,8 @@ RoxygenNote: 7.0.2
 Imports: 
     tibble,
     dplyr,
-    lubridate
+    lubridate,
+    utils
 License: MIT + file LICENSE
 Suggests: 
     testthat (>= 2.1.0)
