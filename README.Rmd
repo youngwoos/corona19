@@ -1,0 +1,40 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# corona19
+
+The goal of corona19 is to get datasets of Coronavirus disease 2019 in South Korea from [Coronavirus-Dataset repository](https://github.com/jihoo-kim/Coronavirus-Dataset).
+
+## Installation
+
+You can install the developing version of corona19 from [github](https://github.com/youngwoos/corona19) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("youngwoos/corona19")
+```
+
+## Example
+```{r example, message = F}
+library(corona19)
+state <- getdata("state")
+state
+
+library(ggplot2)
+ggplot(data = state, aes(x = date, y = acc_confirmed)) + 
+  geom_area(color="darkblue", fill="lightblue") + 
+  scale_x_date(date_breaks = "weeks" , date_labels = "%m-%d")
+```
+

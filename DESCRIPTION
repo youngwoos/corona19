@@ -1,0 +1,22 @@
+Package: corona19
+Title: Data Package of Coronavirus Disease 2019 in South Korea
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Youngwoo",
+           family = "Kim",
+           role = c("aut", "cre"),
+           email = "stats7445@gmail.com")
+Description: Get datasets of Coronavirus disease 2019 in South Korea.
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.2
+Imports: 
+    tibble,
+    dplyr,
+    lubridate
+License: MIT + file LICENSE
+Suggests: 
+    testthat (>= 2.1.0)
+URL: https://github.com/youngwoos/corona19
+BugReports: https://github.com/youngwoos/corona19/issues
