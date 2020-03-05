@@ -3,8 +3,8 @@
 
 # corona19
 
-The goal of `corona19` is to get datasets of Coronavirus disease 2019 in
-South Korea from [Coronavirus-Dataset
+R package for import datasets of Coronavirus disease 2019 in South Korea
+from [Coronavirus-Dataset
 repository](https://github.com/jihoo-kim/Coronavirus-Dataset).
 
 -----

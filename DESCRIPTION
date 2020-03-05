@@ -6,7 +6,7 @@ Authors@R:
            family = "Kim",
            role = c("aut", "cre"),
            email = "stats7445@gmail.com")
-Description: Get datasets of Coronavirus disease 2019 in South Korea.
+Description: Import datasets of Coronavirus disease 2019 in South Korea.
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
