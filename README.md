@@ -21,28 +21,26 @@ remotes::install_github("youngwoos/corona19")
 ``` r
 library(corona19)
 
-# state
-state <- getdata("state")
-state
-#> # A tibble: 45 x 11
-#>    date       acc_test acc_negative acc_confirmed acc_released acc_deceased
-#>    <date>        <int>        <int>         <int>        <int>        <int>
-#>  1 2020-03-04   146541       118965          5766           88           35
-#>  2 2020-03-03   136707       102965          5328           41           32
-#>  3 2020-03-02   125851        85484          4812           34           28
-#>  4 2020-03-01   109591        71580          4212           31           22
-#>  5 2020-02-29    94055        55723          3150           28           17
-#>  6 2020-02-28    81167        48593          2337           27           16
-#>  7 2020-02-27    66652        39318          1766           27           13
-#>  8 2020-02-26    53553        31576          1261           24           12
-#>  9 2020-02-25    40304        25447           977           24           12
-#> 10 2020-02-24    32756        20292           833           24            8
-#> # ... with 35 more rows, and 5 more variables: new_test <int>,
-#> #   new_negative <int>, new_confirmed <int>, new_released <int>,
-#> #   new_deceased <int>
+# time
+time <- getdata("time")
+time
+#> # A tibble: 57 x 7
+#>    date        time   test negative confirmed released deceased
+#>    <date>     <int>  <int>    <int>     <int>    <int>    <int>
+#>  1 2020-03-16     0 274504   251297      8236     1137       75
+#>  2 2020-03-15     0 268212   243778      8126      834       75
+#>  3 2020-03-14     0 261335   235615      8086      714       72
+#>  4 2020-03-13     0 248647   222728      7979      510       67
+#>  5 2020-03-12     0 234998   209402      7869      333       66
+#>  6 2020-03-11     0 222395   196100      7755      288       60
+#>  7 2020-03-10     0 210144   184179      7513      247       54
+#>  8 2020-03-09     0 196618   171778      7382      166       51
+#>  9 2020-03-08     0 188518   162008      7134      130       50
+#> 10 2020-03-07     0 178189   151802      6767      118       44
+#> # ... with 47 more rows
 
-library(ggplot2)
-ggplot(data = state, aes(x = date, y = acc_confirmed)) + 
+library(ggplot2) 
+ggplot(data = time, aes(x = date, y = confirmed)) + 
   geom_area(color="darkblue", fill="lightblue") + 
   scale_x_date(date_breaks = "weeks" , date_labels = "%m-%d")
 ```
@@ -54,21 +52,22 @@ ggplot(data = state, aes(x = date, y = acc_confirmed)) +
 # patient
 patient <- getdata("patient") 
 patient
-#> # A tibble: 5,766 x 14
-#>       id sex   birth_year country region group infection_reason infection_order
-#>    <int> <chr>      <int> <chr>   <chr>  <chr> <chr>                      <int>
-#>  1     1 fema~       1984 China   filte~ <NA>  visit to Wuhan                 1
-#>  2     2 male        1964 Korea   filte~ <NA>  visit to Wuhan                 1
-#>  3     3 male        1966 Korea   capit~ <NA>  visit to Wuhan                 1
-#>  4     4 male        1964 Korea   capit~ <NA>  visit to Wuhan                 1
-#>  5     5 male        1987 Korea   capit~ <NA>  visit to Wuhan                 1
-#>  6     6 male        1964 Korea   capit~ <NA>  contact with pa~               2
-#>  7     7 male        1991 Korea   capit~ <NA>  visit to Wuhan                 1
-#>  8     8 fema~       1957 Korea   Jeoll~ <NA>  visit to Wuhan                 1
-#>  9     9 fema~       1992 Korea   capit~ <NA>  contact with pa~               2
-#> 10    10 fema~       1966 Korea   capit~ <NA>  contact with pa~               3
-#> # ... with 5,756 more rows, and 6 more variables: infected_by <int>,
-#> #   contact_number <int>, confirmed_date <date>, released_date <date>,
+#> # A tibble: 2,119 x 18
+#>    patient_id global_num sex   birth_year age   country province city  disease
+#>         <dbl>      <int> <chr>      <int> <chr> <chr>   <chr>    <chr> <lgl>  
+#>  1 1000000001          2 male        1964 50s   Korea   Seoul    Gang~ NA     
+#>  2 1000000002          5 male        1987 30s   Korea   Seoul    Jung~ NA     
+#>  3 1000000003          6 male        1964 50s   Korea   Seoul    Jong~ NA     
+#>  4 1000000004          7 male        1991 20s   Korea   Seoul    Mapo~ NA     
+#>  5 1000000005          9 fema~       1992 20s   Korea   Seoul    Seon~ NA     
+#>  6 1000000006         10 fema~       1966 50s   Korea   Seoul    Jong~ NA     
+#>  7 1000000007         11 male        1995 20s   Korea   Seoul    Jong~ NA     
+#>  8 1000000008         13 male        1992 20s   Korea   Seoul    etc   NA     
+#>  9 1000000009         19 male        1983 30s   Korea   Seoul    Song~ NA     
+#> 10 1000000010         21 fema~       1960 60s   Korea   Seoul    Seon~ NA     
+#> # ... with 2,109 more rows, and 9 more variables: infection_case <chr>,
+#> #   infection_order <int>, infected_by <chr>, contact_number <int>,
+#> #   symptom_onset_date <chr>, confirmed_date <date>, released_date <date>,
 #> #   deceased_date <date>, state <chr>
 
 ggplot(data = patient, aes(x = 2020-birth_year, fill = sex, colour = sex)) + 
@@ -84,120 +83,40 @@ ggplot(data = patient, aes(x = 2020-birth_year, fill = sex, colour = sex)) +
 route <- getdata("route") 
 
 library(dplyr)
-cnt_visit <- route %>% 
-  count(visit, sort = T) %>% 
+cnt_province <- route %>% 
+  count(province, sort = T) %>% 
   head(10)
 
-cnt_visit
-#> # A tibble: 10 x 2
-#>    visit                 n
-#>    <chr>             <int>
-#>  1 hospital_isolated    19
-#>  2 airport              13
-#>  3 restaurant           13
-#>  4 hospital             10
-#>  5 clinic                8
-#>  6 etc                   7
-#>  7 train_station         7
-#>  8 market                5
-#>  9 store                 5
-#> 10 hair_salon            3
+cnt_province
+#> # A tibble: 8 x 2
+#>   province         n
+#>   <chr>        <int>
+#> 1 Seoul           76
+#> 2 Gyeonggi-do     55
+#> 3 Incheon         17
+#> 4 Daegu           11
+#> 5 Gangwon-do       5
+#> 6 Gwangju          5
+#> 7 Jeollabuk-do     4
+#> 8 Jeollanam-do     2
 
-ggplot(cnt_visit, aes(x = reorder(visit, n), y = n)) + 
+ggplot(cnt_province, aes(x = reorder(province, n), y = n)) + 
   geom_col() + 
   coord_flip() +
-  xlab("visit")
+  xlab("province")
 ```
 
 <img src="man/figures/README-example-3.png" width="100%" />
 
 ## Dataset infomation
 
-### 1\. state
+[dataset-detailed-description.ipynb](https://github.com/jihoo-kim/Data-Science-for-COVID-19/blob/master/dataset-detailed-description.ipynb)
 
-  - **date**: 일자
-  - **acc\_test**: 누적 검사 수 (진행 중인 검사 포함)
-  - **acc\_negative**: 누적 음성 결과 수
-  - **acc\_confirmed**: 누적 양성 결과 수 (확진)
-  - **acc\_released**: 누적 격리 해제 수
-  - **acc\_deceased**: 누적 사망 수
-  - **new\_test**: 신규 검사 수
-  - **new\_negative**: 신규 음성 결과 수
-  - **new\_confirmed**: 신규 양성 결과 수 (확진)
-  - **new\_released**: 신규 격리 해제 수
-  - **new\_deceased**: 신규 사망 수
+`getdata()` import 3 of these datasets.
 
-### 2\. patient
-
-  - **id**: 확진자의 id (n번째 확진자)
-  - **sex**: 성별
-  - **birth\_year**: 출생 연도
-  - **country**: 국적
-      - Korea: 대한민국
-      - China: 중국
-      - Mongolia: 몽골
-  - **region**: 주 활동 지역 (광역시/도 단위)
-      - capital area: 수도권 (서울특별시/인천광역시/경기도)
-      - filtered at airport: 공항 검역 이후 활동하지 않은 경우
-      - Busan: 부산광역시
-      - Daegu: 대구광역시
-      - Daejeon: 대전광역시
-      - Gwangju: 광주광역시
-      - Ulsan: 울산광역시
-      - Gangwon-do: 강원도
-      - Chungcheongbuk-do: 충청북도
-      - Chungcheongnam-do: 충청남도
-      - Jeollabuk-do: 전라북도
-      - Jeollanam-do: 전라남도
-      - Gyeongsangbuk-do: 경상북도
-      - Gyeongsangnam-do: 경상남도
-      - Jeju-do: 제주도
-  - **group**: 특정 집단 관련
-      - Shincheonji Church: 신천지 관련
-      - Cheongdo Daenam Hospital: 청도대남병원 관련
-      - Eunpyeong St. Mary’s Hospital: 은평성모병원 관련
-      - Onchun Church: 온천 교회 관련
-      - Myungsung Church: 명성 교회 관련
-      - Pilgrimage: 이스라엘 성지순례 관련
-  - **infection\_reason**: 감염 경로
-      - visit to ooo: 감염 위험 나라/도시 방문
-      - contact with patient: 국내 확진자와 접촉
-      - contact with patient in ooo: 해외 확진자와 접촉
-      - residence in Wuhan: 중국 우한 거주
-      - pilgrimage to Israel: 이스라엘 성지순례
-  - **infection\_order**: 감염 차수 (n차 감염)
-  - **infected\_by**: 해당 확진자의 감염원 id
-  - **contact\_number**: 접촉자 수
-  - **confirmed\_date**: 확진 일자
-  - **released\_date**: 퇴원 일자 (격리 해제 일자)
-  - **deceased\_date**: 사망 일자
-  - **state**: 상태
-      - isolated: 입원 (격리)
-      - released: 퇴원 (격리 해제)
-      - deceased: 사망
-
-### 3\. route
-
-  - **id**: 확진자의 id (n번째 확진자)
-  - **date**: 일자
-  - **province**: 특별시/광역시/도
-  - **city**: 시/군/구
-  - **visit**: 방문한 장소 (종류)
-      - airport: 공항
-      - hospital\_isolated: 격리된 병원
-      - hospital: 대형급 병원 또는 보건소
-      - clinic: 의원급 병원
-      - hotel: 호텔
-      - store: 소형 가게
-      - market: 대형 마트
-      - restaurant: 식당
-      - cafe: 카페
-      - company:  
-      - bus\_terminal: 버스 터미널
-      - train\_station: 기차역
-      - movie\_theater: 영화관
-      - hair\_salon: 미용실
-      - church: 교회
-      - etc: 기타 방문 장소
-  - **latitude**: 위도
-  - **longitude**: 경도
+  - `patient` from
+    [PatientInfo.csv](https://github.com/jihoo-kim/Data-Science-for-COVID-19/raw/master/dataset/Patient/PatientInfo.csv)
+  - `route` from
+    [PatientRoute.csv](https://github.com/jihoo-kim/Data-Science-for-COVID-19/raw/master/dataset/Patient/PatientRoute.csv)
+  - `time` from
+    [Time.csv](https://github.com/jihoo-kim/Data-Science-for-COVID-19/raw/master/dataset/Time/Time.csv)

@@ -38,8 +38,8 @@ library(corona19)
 time <- getdata("time")
 time
 
-library(ggplot2) %>% 
-ggplot(data = time, aes(x = date, y = acc_confirmed)) + 
+library(ggplot2) 
+ggplot(data = time, aes(x = date, y = confirmed)) + 
   geom_area(color="darkblue", fill="lightblue") + 
   scale_x_date(date_breaks = "weeks" , date_labels = "%m-%d")
 
@@ -55,16 +55,16 @@ ggplot(data = patient, aes(x = 2020-birth_year, fill = sex, colour = sex)) +
 route <- getdata("route") 
 
 library(dplyr)
-cnt_visit <- route %>% 
-  count(visit, sort = T) %>% 
+cnt_province <- route %>% 
+  count(province, sort = T) %>% 
   head(10)
 
-cnt_visit
+cnt_province
 
-ggplot(cnt_visit, aes(x = reorder(visit, n), y = n)) + 
+ggplot(cnt_province, aes(x = reorder(province, n), y = n)) + 
   geom_col() + 
   coord_flip() +
-  xlab("visit")
+  xlab("province")
 ```
 
 ## Dataset infomation
