@@ -4,8 +4,8 @@
 # corona19
 
 R package for import datasets of Coronavirus disease 2019 in South Korea
-from [Coronavirus-Dataset
-repository](https://github.com/jihoo-kim/Coronavirus-Dataset).
+from
+[Data-Science-for-COVID-19](https://github.com/jihoo-kim/Coronavirus-Dataset).
 
 -----
 
@@ -67,7 +67,7 @@ patient
 #> 10 1000000010         21 fema~       1960 60s   Korea   Seoul    Seon~ NA     
 #> # ... with 2,109 more rows, and 9 more variables: infection_case <chr>,
 #> #   infection_order <int>, infected_by <chr>, contact_number <int>,
-#> #   symptom_onset_date <chr>, confirmed_date <date>, released_date <date>,
+#> #   symptom_onset_date <date>, confirmed_date <date>, released_date <date>,
 #> #   deceased_date <date>, state <chr>
 
 ggplot(data = patient, aes(x = 2020-birth_year, fill = sex, colour = sex)) + 
